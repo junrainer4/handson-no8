@@ -1,5 +1,4 @@
 <?php
-// models/Faculty.php
 
 class Faculty {
 
@@ -11,7 +10,6 @@ class Faculty {
         $this->createTable();
     }
 
-    // Create the faculty table if it does not exist
     private function createTable() {
         $this->conn->query("
             CREATE TABLE IF NOT EXISTS {$this->table} (
@@ -29,7 +27,6 @@ class Faculty {
         ");
     }
 
-    // Get all faculty records
     public function getAll() {
         $result = $this->conn->query("SELECT * FROM {$this->table} ORDER BY lname ASC");
         $rows = [];
@@ -39,7 +36,6 @@ class Faculty {
         return $rows;
     }
 
-    // Get a single faculty record by ID
     public function getById($id) {
         $stmt = $this->conn->prepare("SELECT * FROM {$this->table} WHERE id = ?");
         $stmt->bind_param('i', $id);
@@ -47,7 +43,6 @@ class Faculty {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // Insert a new faculty record
     public function create($data) {
         $stmt = $this->conn->prepare("
             INSERT INTO {$this->table} (fname, mname, lname, age, gender, address, position, salary)
@@ -62,7 +57,6 @@ class Faculty {
         return $stmt->execute();
     }
 
-    // Update an existing faculty record
     public function update($id, $data) {
         $stmt = $this->conn->prepare("
             UPDATE {$this->table}
@@ -78,14 +72,12 @@ class Faculty {
         return $stmt->execute();
     }
 
-    // Delete a faculty record
     public function delete($id) {
         $stmt = $this->conn->prepare("DELETE FROM {$this->table} WHERE id = ?");
         $stmt->bind_param('i', $id);
         return $stmt->execute();
     }
 
-    // Validate input data - returns array of errors
     public static function validate($data) {
         $errors = [];
 

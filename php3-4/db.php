@@ -1,6 +1,4 @@
 <?php
-// db.php - Database connection
-// Change these credentials to match your MySQL setup
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
